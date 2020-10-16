@@ -13,7 +13,8 @@ require('./src/db/mongoose')
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: ({ req }) => ({ req })
 })
 
 const port = process.env.PORT
