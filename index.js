@@ -1,4 +1,4 @@
-const { ApolloServer } = require('apollo-server')
+const { ApolloServer, PubSub } = require('apollo-server')
 const gql = require('graphql-tag')
 
 
@@ -9,12 +9,12 @@ require('./src/db/mongoose')
 
 
 
-
+const pubsub = new PubSub()
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req })
+  context: ({ req }) => ({ req, pubsub })
 })
 
 const port = process.env.PORT
